@@ -1,8 +1,11 @@
 package com.example.pokemonapp
 
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,16 +28,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
-
+var ACCESSLOCATION = 123
     fun checkPermision(){
         if(Build.VERSION.SDK_INT>=23){
-
+            if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_DENIED){
+                requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),ACCESSLOCATION)
+                return
+            }
         }
+        getUserLocation()
     }
-    fun GetUserLocation(){
+
+
+    fun getUserLocation(){
         //get location
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            ACCESSLOCATION ->{
+                if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    getUserLocation()
+                }
+                else{
+                    Toast.makeText(this,"Permission not granted",Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
