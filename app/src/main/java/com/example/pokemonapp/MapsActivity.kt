@@ -1,6 +1,8 @@
 package com.example.pokemonapp
 
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,6 +44,7 @@ var ACCESSLOCATION = 123
 
     fun getUserLocation(){
         //get location
+
     }
 
     override fun onRequestPermissionsResult(
@@ -76,5 +79,35 @@ var ACCESSLOCATION = 123
 
         )
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14f))
+    }
+
+
+    //get user location
+    inner class MylocationListener:LocationListener{
+        var location:Location?=null
+      constructor(){
+
+        location= Location("start")
+          location!!.longitude=0.0
+          location!!.latitude= 0.0
+      }
+
+        override fun onLocationChanged(location: Location?) {
+                    this.location=location
+
+        }
+
+        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+          //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onProviderEnabled(provider: String?) {
+            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onProviderDisabled(provider: String?) {
+             //ODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
     }
 }
