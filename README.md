@@ -10,7 +10,7 @@
 * Android 4.4 and higher.
 
 #### Screenshoot
-| Main App  |
+|  Map  |
 |:-------------------:|
 | ![Screenshot](screenshots/qrcode_gen.PNG) |
 
