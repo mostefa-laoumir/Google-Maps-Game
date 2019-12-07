@@ -1,8 +1,10 @@
 package com.example.pokemonapp
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -44,6 +46,11 @@ var ACCESSLOCATION = 123
 
     fun getUserLocation(){
         //get location
+            var myLocation = MylocationListener()
+                var locationManager=getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,3,3f,myLocation)
+                var mythead = myThread()
+                mythead.start()
 
     }
 
@@ -66,25 +73,15 @@ var ACCESSLOCATION = 123
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions()
-            .position(sydney)
-            .title("YOO")
-            .snippet("around the world")
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.daft))
 
 
-        )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14f))
+
     }
 
 
     //get user location
-    inner class MylocationListener:LocationListener{
         var location:Location?=null
+    inner class MylocationListener:LocationListener{
       constructor(){
 
         location= Location("start")
@@ -92,8 +89,8 @@ var ACCESSLOCATION = 123
           location!!.latitude= 0.0
       }
 
-        override fun onLocationChanged(location: Location?) {
-                    this.location=location
+        override fun onLocationChanged(p0: Location?) {
+                    location=p0
 
         }
 
@@ -109,5 +106,30 @@ var ACCESSLOCATION = 123
              //ODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
+    }
+
+
+    inner class myThread:Thread{
+        constructor():super(){
+            }
+        override fun run() {
+            while(true){
+                try {
+                    runOnUiThread{
+                        val daft = LatLng(location!!.latitude, location!!.longitude)
+                        mMap.addMarker(MarkerOptions()
+                            .position(daft)
+                            .title("YOO")
+                            .snippet("around the world")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.daft)))
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(daft,14f))
+                        Thread.sleep(1000)
+                    }
+
+                }catch (ex:Exception){
+
+                }
+            }
+        }
     }
 }
