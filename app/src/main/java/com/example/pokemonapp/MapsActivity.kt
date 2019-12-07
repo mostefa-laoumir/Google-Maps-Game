@@ -30,6 +30,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        checkPermision()
     }
 
 var ACCESSLOCATION = 123
@@ -74,7 +75,7 @@ var ACCESSLOCATION = 123
 
     override fun onMapReady(googleMap: GoogleMap) {
 
-
+        mMap = googleMap
 
     }
 
@@ -116,6 +117,7 @@ var ACCESSLOCATION = 123
             while(true){
                 try {
                     runOnUiThread{
+                        mMap!!.clear()
                         val daft = LatLng(location!!.latitude, location!!.longitude)
                         mMap.addMarker(MarkerOptions()
                             .position(daft)
