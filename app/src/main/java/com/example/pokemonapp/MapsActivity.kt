@@ -130,7 +130,7 @@ var ACCESSLOCATION = 123
                         // show pokemons
                         for(i in 0..pokeList.size-1){
                             var newPoke = pokeList[i]
-                            if(!pokeList[i].cought){
+                            if(pokeList[i].cought==false){
                                 val poke = LatLng(pokeList[i].lat!!, pokeList[i].lng!!)
                                 //show me
                                 mMap!!.addMarker(MarkerOptions()
