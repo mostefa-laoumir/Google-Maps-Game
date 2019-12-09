@@ -31,6 +31,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         checkPermision()
+        loadPoke()
     }
 
 var ACCESSLOCATION = 123
@@ -118,14 +119,29 @@ var ACCESSLOCATION = 123
                 try {
                     runOnUiThread{
                         mMap!!.clear()
-                        val daft = LatLng(location!!.latitude, location!!.longitude)
-                        mMap.addMarker(MarkerOptions()
-                            .position(daft)
+                        val mario = LatLng(location!!.latitude, location!!.longitude)
+                       //show me
+                        mMap!!.addMarker(MarkerOptions()
+                            .position(mario)
                             .title("YOO")
                             .snippet("around the world")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.daft)))
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(daft,14f))
-                        Thread.sleep(1000)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mario)))
+                        mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(mario,14f))
+                        // show pokemons
+                        for(i in 0..pokeList.size-1){
+                            var newPoke = pokeList[i]
+                            if(!pokeList[i].cought){
+                                val poke = LatLng(pokeList[i].lat!!, pokeList[i].lng!!)
+                                //show me
+                                mMap!!.addMarker(MarkerOptions()
+                                    .position(poke)
+                                    .title(pokeList[i].name)
+                                    .snippet(pokeList[i].des)
+                                    .icon(BitmapDescriptorFactory.fromResource(pokeList[i].image!!)))
+                                mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(mario,14f))
+                            }
+                        }
+
                     }
 
                 }catch (ex:Exception){
@@ -134,4 +150,12 @@ var ACCESSLOCATION = 123
             }
         }
     }
+    var pokeList = ArrayList<Pokemon>()
+    fun loadPoke(){
+        pokeList.add(Pokemon("charmander", "I am in Japan", R.drawable.charmander, 55.0,37.7789994893035, -122.401846647263))
+        pokeList.add(Pokemon("Bulbasaur", "I am in USA", R.drawable.bulbasaur, 90.5,37.7949568502667, -122.410494089127))
+        pokeList.add(Pokemon("Squirtle", "I am in ALGERIA", R.drawable.squirtle, 331.0,37.7816621152613, -122.41225361824))
+
+    }
+
 }
