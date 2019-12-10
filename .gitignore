@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+/app\src\release\res\values
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
