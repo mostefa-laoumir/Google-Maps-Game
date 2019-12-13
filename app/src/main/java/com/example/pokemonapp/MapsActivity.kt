@@ -6,9 +6,8 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
-import android.support.v4.app.FragmentActivity
+
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -124,15 +123,12 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback  {
         }
 
         override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
         override fun onProviderEnabled(p0: String?) {
-            // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
         override fun onProviderDisabled(p0: String?) {
-            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
     }
