@@ -21,6 +21,22 @@ class  Pockemon{
         this.location!!.longitude=log
         this.IsCatch=false
     }
+    
+    fun IsItCatch(): Boolean {
+        return IsCatch
+    }
+    
+    fun PokemonName(): String {
+        return name
+    }
+    
+    fun PokemonDes(): String {
+        return des
+    }
+    
+    fun PokemonPower(): Double {
+        return power
+    }
 
 }
 
