@@ -30,6 +30,12 @@ class  Pockemon{
         return name
     }
     
+	fun myPokemone(): String {
+	  var pokemone  = "pikatchu"
+        return pokemone
+    }
+    
+	
     fun PokemonDes(): String {
         return des
     }

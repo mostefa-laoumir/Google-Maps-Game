@@ -146,69 +146,70 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback  {
         override fun run(){
 
             while (true){
+				var x = 0 
+				if (x == 0) {
+					try {
 
-                try {
+						if(oldLocation!!.distanceTo(location)==0f){
+							continue
+						}
 
-                    if(oldLocation!!.distanceTo(location)==0f){
-                        continue
-                    }
-
-                    oldLocation=location
-
-
-                    runOnUiThread {
+						oldLocation=location
 
 
-                        mMap!!.clear()
-
-                        // show me
-                        val sydney = LatLng(location!!.latitude, location!!.longitude)
-                        mMap!!.addMarker(MarkerOptions()
-                            .position(sydney)
-                            .title("Me")
-                            .snippet(" here is my location")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mario)))
-                        mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 14f))
-
-                        // show pockemons
-
-                        for(i in 0..listPockemons.size-1){
-
-                            var newPockemon=listPockemons[i]
-
-                            if(newPockemon.IsCatch==false){
-
-                                val pockemonLoc = LatLng(newPockemon.location!!.latitude, newPockemon.location!!.longitude)
-                                mMap!!.addMarker(MarkerOptions()
-                                    .position(pockemonLoc)
-                                    .title(newPockemon.name!!)
-                                    .snippet(newPockemon.des!! +", power:"+ newPockemon!!.power)
-                                    .icon(BitmapDescriptorFactory.fromResource(newPockemon.image!!)))
+						runOnUiThread {
 
 
-                                if (location!!.distanceTo(newPockemon.location)<2){
-                                    newPockemon.IsCatch=true
-                                    listPockemons[i]=newPockemon
-                                    playerPower+=newPockemon.power!!
-                                    Toast.makeText(applicationContext,
-                                        "You catch new pockemon your new pwoer is " + playerPower,
-                                        Toast.LENGTH_LONG).show()
+							mMap!!.clear()
 
-                                }
+							// show me
+							val sydney = LatLng(location!!.latitude, location!!.longitude)
+							mMap!!.addMarker(MarkerOptions()
+								.position(sydney)
+								.title("Me")
+								.snippet(" here is my location")
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.mario)))
+							mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 14f))
 
-                            }
-                        }
+							// show pockemons
+
+							for(i in 0..listPockemons.size-1){
+
+								var newPockemon=listPockemons[i]
+
+								if(newPockemon.IsCatch==false){
+
+									val pockemonLoc = LatLng(newPockemon.location!!.latitude, newPockemon.location!!.longitude)
+									mMap!!.addMarker(MarkerOptions()
+										.position(pockemonLoc)
+										.title(newPockemon.name!!)
+										.snippet(newPockemon.des!! +", power:"+ newPockemon!!.power)
+										.icon(BitmapDescriptorFactory.fromResource(newPockemon.image!!)))
+
+
+									if (location!!.distanceTo(newPockemon.location)<2){
+										newPockemon.IsCatch=true
+										listPockemons[i]=newPockemon
+										playerPower+=newPockemon.power!!
+										Toast.makeText(applicationContext,
+											"You catch new pockemon your new pwoer is " + playerPower,
+											Toast.LENGTH_LONG).show()
+
+									}
+
+								}
+							}
 
 
 
 
 
-                    }
+						}
 
-                    Thread.sleep(1000)
+						Thread.sleep(1000)
 
-                }catch (ex:Exception){}
-
+					}catch (ex:Exception){}
+				}
 
             }
 
