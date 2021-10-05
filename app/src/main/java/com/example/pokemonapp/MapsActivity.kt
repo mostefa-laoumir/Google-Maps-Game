@@ -42,6 +42,10 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback  {
     }
 
     var ACCESSLOCATION=123
+    var ACCESSLOCATION=123
+    var ACCESSLOCATION=123
+
+
     fun checkPermmison(){
 
         if(Build.VERSION.SDK_INT>=23){
