@@ -42,8 +42,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback  {
     }
 
     var ACCESSLOCATION=123
-    var ACCESSLOCATION=123
-    var ACCESSLOCATION=123
+   
 
 
     fun checkPermmison(){
