@@ -119,7 +119,6 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback  {
         constructor(){
             location= Location("Start")
             location!!.longitude=0.0
-            location!!.longitude=0.0
         }
         override fun onLocationChanged(p0: Location?) {
             location=p0
