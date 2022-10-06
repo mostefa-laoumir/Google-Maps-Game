@@ -1,6 +1,9 @@
 package com.example.pokemonapp
 
 
+/*
+in the search for pokemons
+*/
 
 import android.location.Location
 
