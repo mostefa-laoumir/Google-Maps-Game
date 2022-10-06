@@ -25,6 +25,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback  {
 
     //WORK WITH USER LOCATION
 
+    //WORK WITH USER LOCATION
 
     private var mMap: GoogleMap? = null
 
